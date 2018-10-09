@@ -1,0 +1,64 @@
+package ir.adventure.observer.client.core.org.telegram.api.page;
+
+import ir.adventure.observer.client.core.org.telegram.api.document.TLAbsDocument;
+import ir.adventure.observer.client.core.org.telegram.api.page.block.TLAbsPageBlock;
+import ir.adventure.observer.client.core.org.telegram.api.photo.TLAbsPhoto;
+import ir.adventure.observer.client.core.org.telegram.tl.StreamingUtils;
+import ir.adventure.observer.client.core.org.telegram.tl.TLContext;
+import ir.adventure.observer.client.core.org.telegram.tl.TLVector;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+/**
+ * @author Ruben Bermudez
+ * @version 1.0
+ */
+public class TLPageFull extends TLAbsPage {
+    public static final int CLASS_ID = 0xd7a19d69;
+
+    private TLVector<TLAbsPageBlock> blocks;
+    private TLVector<TLAbsPhoto> photos;
+    private TLVector<TLAbsDocument> videos;
+
+    public TLPageFull() {
+        super();
+    }
+
+    @Override
+    public int getClassId() {
+        return CLASS_ID;
+    }
+
+    public TLVector<TLAbsPageBlock> getBlocks() {
+        return blocks;
+    }
+
+    public TLVector<TLAbsPhoto> getPhotos() {
+        return photos;
+    }
+
+    public TLVector<TLAbsDocument> getVideos() {
+        return videos;
+    }
+
+    @Override
+    public void serializeBody(OutputStream stream) throws IOException {
+        StreamingUtils.writeTLVector(blocks, stream);
+        StreamingUtils.writeTLVector(photos, stream);
+        StreamingUtils.writeTLVector(videos, stream);
+    }
+
+    @Override
+    public void deserializeBody(InputStream stream, TLContext context) throws IOException {
+        blocks = StreamingUtils.readTLVector(stream, context, TLAbsPageBlock.class);
+        photos = StreamingUtils.readTLVector(stream, context, TLAbsPhoto.class);
+        videos = StreamingUtils.readTLVector(stream, context, TLAbsDocument.class);
+    }
+
+    @Override
+    public String toString() {
+        return "pageFull#d7a19d69";
+    }
+}
