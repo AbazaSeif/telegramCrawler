@@ -1,0 +1,80 @@
+server:
+  port: 9090
+  session-timeout: 3600000
+
+spring:
+  datasource:
+    #@ aban- for server
+    #url: jdbc:mysql://46.165.240.233:3366/adventure_db?zeroDateTimeBehavior=convertToNull
+    #@ aban- for jalil
+    #url: jdbc:mysql://localhost/adventure?zeroDateTimeBehavior=convertToNull
+    #@ server
+    #url: jdbc:mysql://adventure_db/adventure_db?zeroDateTimeBehavior=convertToNull
+    #@samat
+    #url: jdbc:mysql://samat-server/adventure?zeroDateTimeBehavior=convertToNull&characterEncoding=utf8
+    #@reza-pc
+    #url: jdbc:mysql://shomal-server:3348/raven_db?characterEncoding=utf8
+    url: jdbc:mysql://localhost/adventure_db
+    username: root
+    password: root
+    validationQuery: SELECT 1
+    testOnBorrow: true
+  
+  jpa:
+    properties:
+      javax:
+        persistence:
+          validation:
+            mode: none
+
+
+
+sms:
+  tokenUrl: http://RestfulSms.com/api/Token
+  UserApiKey: ac94cf0bfce4ab229502cf0b
+  SecretKey: salamjalil
+  smsUrl: http://RestfulSms.com/api/VerificationCode
+  smsTokenHeaderKey: x-sms-ir-secure-token
+  smsTokenTemplateUrl: http://RestfulSms.com/api/UltraFastSend
+  smsCustomerClubAddSend: http://RestfulSms.com/api/CustomerClub/AddContactAndSend
+  tokenKey: VerificationCode
+  templateId: 1085
+
+
+payment:
+  merchantId: 8a4045e4-3276-11e8-a848-005056a205be
+  callbackURL: http://localhost:8080/api/order/completePay/
+  paymentRequest: https://www.zarinpal.com/pg/rest/WebGate/PaymentRequest.json
+  paymentVerificationURL: https://www.zarinpal.com/pg/rest/WebGate/PaymentVerification.json
+  startPayURL: https://www.zarinpal.com/pg/StartPay/
+  viewCompletePayment: http://localhost:8080/#/app/my-order?view=afterPay&orderId=
+multipart:
+  max-file-size: 3500KB
+  max-request-size: 3500KB
+panel:
+  debug: true
+bot:
+  url: http://localhost:9091/core
+  accessHash: hashA
+shortLink:
+  baseDomain: advn.ir/
+  advn:
+    baseUrl: http://jalilPc:9090/api/
+    apiKey: hashA
+  clickMeter:
+    baseUrl: http://apiv2.shortLink.com/
+    domainId: 41872
+    apiKey: 30C6EB11-4F3B-488A-BAF6-2806D6C73379
+
+observer:
+    messagePerRequest: 1
+    adRemoverId: 1
+    estimate24:
+      beginHour: 4
+      endHour: 5
+      tryDelay: 50
+    period:
+      allChannel: 10
+    loadDelay: 50
+channel:
+  maxObserverChannelJoin: 5
